@@ -1,0 +1,956 @@
+
+Tech Stack at a Glance
+
+
+The Master Combined Prompt
+Copy the entire block below and paste it into Claude Code, Cursor, GitHub Copilot Chat, or any AI coding assistant. It is self-contained and covers the complete application from environment setup through deployment.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This section maps each evaluaton criterion to where it is demonstrated in the project.
+
+
+Recommended Viva Demo Flow (5 Minutes)
+
+Step 1 (30s): Open the Register page → fill in details → show learning style selection → register
+Step 2 (45s): Dashboard loads → point out stat cards, today's schedule (empty), priority tasks section
+Step 3 (60s): Go to Tasks → Add Task (e.g. 'Complete ML Assignment', CS, deadline tomorrow, difficulty 4) → show auto-priority badge appear
+Step 4 (45s): Go to Schedule → click 'Generate AI Schedule' → watch week populate with study + break slots
+Step 5 (60s): Go to AI Chat → type 'I have an exam tomorrow and I am stressed' → show AI's warm, contextual response
+Step 6 (30s): Go to Focus Timer → select the task → start 25-min timer → show SVG animation → click 'Take Break'
+Step 7 (30s): Go to Wellbeing → log mood 4/10 stress 8/10 → show alert banner appear
+Step 8 (30s): Go to Analytics → show productivity heatmap, subject pie chart, streak info
+
+SMART STUDY COMPANION
+An AI-Powered Productivity & Wellbeing Tool for Students
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MASTER FULL-STACK BUILD PROMPT
+Backend: Python + FastAPI     |     Frontend: React + TailwindCSS
+Department of Artificial Intelligence & Data Science
+Francis Xavier Engineering College  |  Course: 24GE4911	
+
+Layer	Technology	Purpose	
+Frontend	React 18 + Vite + TailwindCSS	UI, routing, state management	
+State Mgmt	Zustand + React Query (TanStack)	Global auth state + API caching	
+Backend	FastAPI (Python 3.11)	REST API + WebSocket server	
+ORM / DB	SQLAlchemy (async) + PostgreSQL	Data persistence	
+Auth	JWT (python-jose) + OAuth2	Secure token-based auth	
+AI / NLP	Anthropic Claude API (claude-3-5-sonnet)	Chatbot, summaries, insights	
+ML / Analytics	scikit-learn + pandas + numpy	Scheduling, stress detection	
+Cache / Queue	Redis + Celery	Background tasks, reminders	
+Charts	Recharts + Chart.js	Analytics visualizations	
+
+SECTION 1 — Project Identity & Goal	
+
+You are building a production-quality full-stack web application called
+"Smart Study Companion" — an AI-powered productivity and wellbeing tool
+for college students. The system helps students manage tasks, generate
+personalized study schedules, track focus sessions, monitor stress/mood,
+and chat with an AI companion for academic and emotional support.
+
+TECH STACK:
+  Backend  : Python 3.11, FastAPI, SQLAlchemy (async), PostgreSQL,
+             Redis, Celery, Anthropic Python SDK
+  Frontend : React 18, Vite, TailwindCSS, Zustand, React Query v5,
+             React Router v6, Recharts
+  Auth     : JWT (python-jose) + OAuth2PasswordBearer
+  Realtime : WebSocket (FastAPI native)
+  Queue    : Celery + Redis	
+
+SECTION 2 — Complete Folder Structure	
+
+Generate this EXACT folder structure with all files (empty or boilerplate):
+
+backend/
+  app/
+    api/
+      routes/
+        auth.py          # POST /register, /login, /me, /refresh-token
+        tasks.py         # CRUD + priority auto-compute + /today
+        schedule.py      # AI schedule generate + CRUD
+        focus.py         # Start/end session + break log + stats
+        wellbeing.py     # Mood log + stress alerts + recommendations
+        ai_chat.py       # Chat messages + summarize notes + explain
+        analytics.py     # Dashboard stats + heatmap + progress charts
+    core/
+        config.py        # Settings with pydantic-settings (reads .env)
+        security.py      # hash_password, verify_password, create/decode JWT
+        database.py      # Async SQLAlchemy engine + get_db dependency
+    models/
+        user.py          # User table
+        task.py          # Task table
+        session.py       # StudySession table
+        mood.py          # MoodEntry table
+        schedule.py      # Schedule table
+        chat.py          # ChatMessage table
+    schemas/
+        user.py          # UserCreate, UserOut, Token schemas
+        task.py          # TaskCreate, TaskUpdate, TaskOut
+        session.py       # SessionStart, SessionEnd, SessionOut
+        mood.py          # MoodCreate, MoodOut, StressAlert
+        schedule.py      # ScheduleOut, TimeSlot
+        chat.py          # ChatMessageCreate, ChatMessageOut
+    services/
+        ai_service.py    # Anthropic API calls
+        scheduler_service.py  # Schedule generation logic
+        stress_service.py     # Stress pattern analysis
+        recommender_service.py # Study tip recommender
+    ml/
+        study_scheduler.py    # Greedy scheduling algorithm
+        stress_detector.py    # Rolling avg + trend detection
+        behavioral_analytics.py # Peak hours computation
+        recommender.py        # Collaborative filter stub
+    celery_tasks/
+        reminder_tasks.py     # Daily reminder Celery task
+        analytics_tasks.py    # Nightly compute_peak_hours task
+    main.py              # FastAPI app + CORS + router includes + startup
+  alembic/               # DB migrations
+  requirements.txt
+  .env.example
+  docker-compose.yml
+  Dockerfile
+
+frontend/
+  src/
+    pages/
+      Auth/
+        Login.jsx
+        Register.jsx
+      Dashboard.jsx
+      Tasks.jsx
+      Schedule.jsx
+      FocusTimer.jsx
+      Wellbeing.jsx
+      Chat.jsx
+      Analytics.jsx
+      Settings.jsx
+    components/
+      Layout/
+        Sidebar.jsx      # Collapsible icon + label nav
+        Navbar.jsx       # User avatar, streak badge, alerts bell
+        Layout.jsx       # Wrapper with Sidebar + Navbar
+      TaskCard.jsx       # Task item with inline status change
+      MoodTracker.jsx    # 10-emoji mood check-in widget
+      StudyTimer.jsx     # SVG circular countdown
+      ChatWindow.jsx     # Chat bubble UI
+      ProgressChart.jsx  # Recharts wrapper
+      ProtectedRoute.jsx # Auth guard
+    hooks/
+      useAuth.js
+      useTasks.js
+      useSchedule.js
+      useChat.js
+      useWellbeing.js
+    store/
+      authStore.js       # Zustand: user, token, login(), logout()
+      taskStore.js       # Zustand: filters, selected task
+      uiStore.js         # Zustand: sidebar open, theme
+    api/
+      axiosInstance.js   # Base URL + auth header + 401 interceptor
+      authApi.js
+      tasksApi.js
+      scheduleApi.js
+      focusApi.js
+      wellbeingApi.js
+      chatApi.js
+      analyticsApi.js
+    utils/
+      formatters.js      # Date, duration, percentage formatters
+      constants.js       # SUBJECT_COLORS, MOOD_EMOJIS, etc.
+    App.jsx
+    main.jsx
+  package.json
+  tailwind.config.js
+  vite.config.js
+  .env.example	
+
+SECTION 3 — Database Models (SQLAlchemy + Pydantic)	
+
+Create async SQLAlchemy models using DeclarativeBase. All tables get
+created_at = Column(DateTime, default=datetime.utcnow).
+
+MODEL 1 — User (app/models/user.py):
+  id              UUID primary key (default uuid4)
+  email           String(255) unique, not null, indexed
+  name            String(100) not null
+  hashed_password String not null
+  learning_style  Enum: Visual | Auditory | Reading | Kinesthetic
+  peak_hours      JSON (list of ints 0-23, e.g. [9, 14, 20])
+  avatar_url      String nullable
+  is_active       Boolean default True
+  created_at      DateTime
+
+MODEL 2 — Task (app/models/task.py):
+  id              UUID primary key
+  user_id         FK -> users.id (cascade delete)
+  title           String(255) not null
+  description     Text nullable
+  subject         String(100) not null
+  deadline        DateTime nullable
+  difficulty      Integer 1-5 (CheckConstraint)
+  importance_flag Boolean default False
+  priority_score  Float (auto-computed, stored)
+  estimated_mins  Integer default 60
+  status          Enum: pending | in_progress | done | archived
+  created_at      DateTime
+
+MODEL 3 — StudySession (app/models/session.py):
+  id              UUID primary key
+  user_id         FK -> users.id
+  task_id         FK -> tasks.id nullable
+  start_time      DateTime not null
+  end_time        DateTime nullable
+  duration_mins   Integer nullable (computed on end)
+  focus_score     Integer 1-10 nullable (self-reported on end)
+  break_count     Integer default 0
+  distraction_count Integer default 0
+  notes           Text nullable
+
+MODEL 4 — MoodEntry (app/models/mood.py):
+  id              UUID primary key
+  user_id         FK -> users.id
+  timestamp       DateTime default utcnow
+  mood_score      Integer 1-10
+  stress_level    Integer 1-10
+  notes           Text nullable
+  trigger_tags    JSON (list of strings: exams, workload, sleep, social)
+
+MODEL 5 — Schedule (app/models/schedule.py):
+  id              UUID primary key
+  user_id         FK -> users.id
+  date            Date not null
+  time_slots      JSON (list of TimeSlot objects)
+  generated_by_ai Boolean default False
+  created_at      DateTime
+  Unique constraint on (user_id, date)
+
+MODEL 6 — ChatMessage (app/models/chat.py):
+  id              UUID primary key
+  user_id         FK -> users.id
+  role            Enum: user | assistant
+  content         Text not null
+  timestamp       DateTime default utcnow
+  session_tag     String(50) nullable (group related convo turns)
+
+PYDANTIC SCHEMAS (app/schemas/):
+  - UserCreate(email, name, password, learning_style)
+  - UserOut(id, email, name, learning_style, peak_hours, created_at)
+  - Token(access_token, token_type)
+  - TaskCreate(title, subject, deadline, difficulty, importance_flag, estimated_mins)
+  - TaskOut(all fields + priority_score)
+  - TaskUpdate (all TaskCreate fields optional)
+  - SessionStart(task_id, planned_duration_mins)
+  - SessionEnd(focus_score, notes, distraction_count)
+  - SessionOut(all session fields)
+  - MoodCreate(mood_score, stress_level, notes, trigger_tags)
+  - MoodOut(all mood fields)
+  - StressAlert(alert_triggered, current_avg, trend, recommendations)
+  - TimeSlot(start_time, end_time, task_id, task_title, slot_type: study|break|exam)
+  - ScheduleOut(date, time_slots, generated_by_ai)
+  - ChatMessageCreate(content)
+  - ChatMessageOut(id, role, content, timestamp)
+
+DATABASE SETUP (app/core/database.py):
+  - create_async_engine(DATABASE_URL, echo=False)
+  - async_sessionmaker for get_db() dependency
+  - async init_db() that calls Base.metadata.create_all()
+
+SECURITY (app/core/security.py):
+  - CryptContext(schemes=['bcrypt'])
+  - hash_password(plain) -> hashed
+  - verify_password(plain, hashed) -> bool
+  - create_access_token(data: dict, expires_delta) -> str
+  - get_current_user(token: str, db) -> User (dependency)	
+
+SECTION 4 — All Backend API Endpoints	
+
+All routes are prefixed /api/v1 in main.py.
+All routes except /api/v1/auth/* require get_current_user dependency.
+
+── AUTH ROUTES (app/api/routes/auth.py) ──────────────────────────────
+POST   /auth/register
+  Body: UserCreate
+  Logic: check email unique → hash password → insert User → return Token
+
+POST   /auth/login
+  Body: OAuth2PasswordRequestForm (email as username, password)
+  Logic: fetch user by email → verify_password → create_access_token
+  Return: Token
+
+GET    /auth/me
+  Return: UserOut for current_user
+
+── TASK ROUTES (app/api/routes/tasks.py) ─────────────────────────────
+POST   /tasks
+  Body: TaskCreate
+  Logic:
+    urgency = max(0, 1 - (deadline - now).days / 30) if deadline else 0.5
+    priority_score = (difficulty/5)*0.4 + urgency*0.4 + importance_flag*0.2
+    Insert task with priority_score
+  Return: TaskOut
+
+GET    /tasks
+  Query params: status, subject, sort_by (priority|deadline|created_at)
+  Return: List[TaskOut]
+
+GET    /tasks/today
+  Logic: filter pending/in_progress, sort by priority_score desc, limit 5
+  Return: List[TaskOut]
+
+GET    /tasks/{task_id}   Return: TaskOut
+PUT    /tasks/{task_id}   Body: TaskUpdate → recalculate priority → Return: TaskOut
+DELETE /tasks/{task_id}   Soft-delete (status=archived)
+PATCH  /tasks/{task_id}/status  Body: {status: str} → Return: TaskOut
+
+── SCHEDULE ROUTES (app/api/routes/schedule.py) ──────────────────────
+POST   /schedule/generate
+  Body: {start_date: date, days: int = 7}
+  Logic: call scheduler_service.generate_schedule(user_id, start_date, days)
+  Return: List[ScheduleOut]
+
+GET    /schedule/{date}   Return: ScheduleOut for that date
+GET    /schedule/week     Query: week_start date → Return: List[ScheduleOut] (7 days)
+PUT    /schedule/{date}   Body: List[TimeSlot] → manual override → Return: ScheduleOut
+
+── FOCUS ROUTES (app/api/routes/focus.py) ────────────────────────────
+POST   /focus/start
+  Body: SessionStart
+  Logic: check no active session → insert StudySession(start_time=now)
+  Return: SessionOut
+
+POST   /focus/end
+  Body: SessionEnd + session_id
+  Logic: compute duration_mins → update StudySession → return SessionOut
+
+GET    /focus/active      Return: active SessionOut or null
+POST   /focus/break       Body: {session_id} → increment break_count
+GET    /focus/sessions    Query: date_range, task_id → Return: List[SessionOut]
+GET    /focus/stats/week
+  Return: {total_mins, avg_focus, total_sessions, most_productive_hour}
+
+── WELLBEING ROUTES (app/api/routes/wellbeing.py) ────────────────────
+POST   /wellbeing/mood    Body: MoodCreate → insert MoodEntry → Return: MoodOut
+GET    /wellbeing/mood/history
+  Query: days=30 → Return: List[MoodOut] ordered by timestamp desc
+
+GET    /wellbeing/alerts
+  Logic: call stress_service.analyze_stress_pattern(last 7 MoodEntries)
+  Return: StressAlert
+
+GET    /wellbeing/recommendations
+  Logic: based on current stress trend → return curated tip list
+  Return: {trend: str, tips: List[str]}
+
+POST   /wellbeing/break-suggestion
+  Logic: get active session duration → return Pomodoro advice
+  Return: {should_break: bool, message: str, activity: str}
+
+── AI CHAT ROUTES (app/api/routes/ai_chat.py) ────────────────────────
+POST   /chat/message
+  Body: ChatMessageCreate (content)
+  Logic:
+    1. Save user message to DB
+    2. Fetch last 10 messages for conversation history
+    3. Build system prompt (see AI Service section)
+    4. Call Anthropic API
+    5. Save assistant reply to DB
+  Return: ChatMessageOut (assistant reply)
+
+GET    /chat/history      Query: limit=50, offset=0 → Return: List[ChatMessageOut]
+DELETE /chat/history      Delete all ChatMessages for current user
+
+POST   /chat/summarize-notes
+  Body: {text: str}
+  Logic: Call Anthropic with prompt to summarize study notes into key points
+  Return: {summary: str, key_points: List[str]}
+
+POST   /chat/explain
+  Body: {topic: str}
+  Logic: Call Anthropic to explain topic in learning_style-appropriate way
+  Return: {explanation: str}
+
+── ANALYTICS ROUTES (app/api/routes/analytics.py) ────────────────────
+GET    /analytics/dashboard
+  Return: {tasks_completed_week, study_hours_week, avg_stress_week,
+           streak_days, most_studied_subject}
+
+GET    /analytics/productivity
+  Return: [{hour: int, avg_focus: float}] × 24 (heatmap data)
+
+GET    /analytics/subjects
+  Return: [{subject: str, total_mins: int, percentage: float}]
+
+GET    /analytics/progress
+  Return: [{week_start: date, completion_rate: float}] × 8 weeks
+
+GET    /analytics/streaks
+  Return: {current_streak, longest_streak, last_studied_date}	
+
+SECTION 5 — Services & ML Logic	
+
+── AI SERVICE (app/services/ai_service.py) ───────────────────────────
+Use: import anthropic; client = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
+
+async def chat_with_companion(user, message, history, db):
+  # Build dynamic system prompt
+  pending_tasks = await get_pending_tasks_summary(user.id, db)
+  recent_mood = await get_latest_mood(user.id, db)
+  system = f'''
+    You are a warm, supportive Smart Study Companion AI for {user.name}.
+    Learning style: {user.learning_style}.
+    Pending tasks: {pending_tasks}.
+    Current stress level: {recent_mood.stress_level if recent_mood else 'unknown'}/10.
+    Keep responses concise (max 150 words). Be encouraging and practical.
+    If stress > 7, gently suggest a break or breathing exercise.
+  '''
+  messages = [{'role': m.role, 'content': m.content} for m in history[-10:]]
+  messages.append({'role': 'user', 'content': message})
+  response = client.messages.create(
+    model='claude-sonnet-4-5',
+    max_tokens=500,
+    system=system,
+    messages=messages
+  )
+  return response.content[0].text
+
+async def summarize_notes(text: str) -> dict:
+  prompt = f'Summarize these study notes into 5 key bullet points:\n\n{text}'
+  response = client.messages.create(
+    model='claude-sonnet-4-5', max_tokens=400,
+    messages=[{'role': 'user', 'content': prompt}]
+  )
+  return {'summary': response.content[0].text}
+
+── SCHEDULER SERVICE (app/services/scheduler_service.py) ─────────────
+async def generate_schedule(user_id, start_date, days, db):
+  tasks = await get_pending_tasks(user_id, db)  # ordered by priority_score desc
+  user = await get_user(user_id, db)
+  peak_hours = user.peak_hours or [9, 14, 19]
+  schedules = []
+  for day_offset in range(days):
+    date = start_date + timedelta(days=day_offset)
+    slots = ml.study_scheduler.allocate_day(
+      tasks=tasks, date=date, peak_hours=peak_hours,
+      max_study_hours=8, pomodoro_work=25, pomodoro_break=5
+    )
+    schedule = Schedule(user_id=user_id, date=date,
+                        time_slots=slots, generated_by_ai=True)
+    db.add(schedule)
+    schedules.append(schedule)
+  await db.commit()
+  return schedules
+
+── ML: STUDY SCHEDULER (app/ml/study_scheduler.py) ──────────────────
+def allocate_day(tasks, date, peak_hours, max_study_hours, pomodoro_work, pomodoro_break):
+  available_start = datetime.combine(date, time(8, 0))  # 8 AM
+  available_end = datetime.combine(date, time(22, 0))   # 10 PM
+  current_time = available_start
+  slots = []
+  total_study_mins = 0
+  max_study_mins = max_study_hours * 60
+  for task in tasks:  # already sorted by priority
+    if total_study_mins >= max_study_mins: break
+    if current_time >= available_end: break
+    # Prefer peak hours for high-difficulty tasks
+    if task.difficulty >= 4 and current_time.hour not in peak_hours:
+      continue  # defer to later iteration
+    duration = min(task.estimated_mins, pomodoro_work * 4)  # max 100 min block
+    end_time = current_time + timedelta(minutes=duration)
+    if end_time > available_end: break
+    slots.append({'start': current_time.isoformat(), 'end': end_time.isoformat(),
+                  'task_id': str(task.id), 'task_title': task.title,
+                  'slot_type': 'study'})
+    current_time = end_time + timedelta(minutes=pomodoro_break)
+    # Add break slot
+    slots.append({'start': end_time.isoformat(),
+                  'end': current_time.isoformat(),
+                  'task_id': None, 'task_title': 'Break', 'slot_type': 'break'})
+    total_study_mins += duration
+  return slots
+
+── ML: STRESS DETECTOR (app/ml/stress_detector.py) ──────────────────
+def analyze_stress_pattern(mood_entries: list) -> dict:
+  if not mood_entries: return {'alert_triggered': False, 'trend': 'stable'}
+  scores = [m.stress_level for m in mood_entries]
+  rolling_3 = sum(scores[:3]) / min(3, len(scores))
+  # Linear trend via least squares
+  x = list(range(len(scores)))
+  n = len(x)
+  slope = (n*sum(i*s for i,s in zip(x,scores)) - sum(x)*sum(scores))
+          / (n*sum(i**2 for i in x) - sum(x)**2 + 1e-9)
+  trend = 'increasing' if slope > 0.3 else 'decreasing' if slope < -0.3 else 'stable'
+  alert = rolling_3 > 7 and trend in ('increasing', 'stable')
+  recs = []
+  if alert:
+    recs = ['Take a 15-min walk between study sessions',
+            'Try 4-7-8 breathing: inhale 4s, hold 7s, exhale 8s',
+            'Break your next task into 10-min micro-goals',
+            'Talk to a friend or counselor — you are not alone']
+  return {'alert_triggered': alert, 'current_avg': rolling_3,
+          'trend': trend, 'recommendations': recs}
+
+── CELERY TASKS (app/celery_tasks/) ──────────────────────────────────
+# analytics_tasks.py
+@celery_app.task
+def nightly_compute_peak_hours():
+  # For each active user, run behavioral_analytics.compute_peak_hours()
+  # Update user.peak_hours in DB
+  # Schedule: runs at 02:00 AM daily via Celery Beat
+
+# reminder_tasks.py
+@celery_app.task
+def send_study_reminder(user_id, task_title):
+  # In a real app: push notification or email
+  # For demo: log to console / store in a notifications table
+  # Triggered 1 hour before first scheduled task each day	
+
+SECTION 6 — Frontend: Setup, Auth & Layout	
+
+── TAILWIND CONFIG (tailwind.config.js) ──────────────────────────────
+module.exports = {
+  content: ['./src/**/*.{js,jsx}'],
+  theme: {
+    extend: {
+      colors: {
+        brand: { DEFAULT: '#2563EB', dark: '#1E40AF', light: '#60A5FA' },
+        surface: { DEFAULT: '#0F172A', card: '#1E293B', elevated: '#334155' },
+        accent: { green: '#059669', amber: '#D97706', rose: '#E11D48' },
+      },
+      fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+    }
+  }
+}
+
+── ZUSTAND STORES ─────────────────────────────────────────────────────
+// store/authStore.js
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
+export const useAuthStore = create(persist((set) => ({
+  user: null,
+  token: null,
+  login: (user, token) => set({ user, token }),
+  logout: () => set({ user: null, token: null }),
+}), { name: 'auth-storage' }))
+
+// store/uiStore.js
+export const useUIStore = create((set) => ({
+  sidebarOpen: true,
+  toggleSidebar: () => set(s => ({ sidebarOpen: !s.sidebarOpen })),
+})) 
+
+── AXIOS INSTANCE (api/axiosInstance.js) ─────────────────────────────
+import axios from 'axios'
+import { useAuthStore } from '../store/authStore'
+const api = axios.create({ baseURL: import.meta.env.VITE_API_BASE_URL })
+api.interceptors.request.use(config => {
+  const token = useAuthStore.getState().token
+  if (token) config.headers.Authorization = `Bearer ${token}`
+  return config
+})
+api.interceptors.response.use(r => r, err => {
+  if (err.response?.status === 401) useAuthStore.getState().logout()
+  return Promise.reject(err)
+})
+export default api
+
+── LOGIN PAGE (pages/Auth/Login.jsx) ─────────────────────────────────
+Dark fullscreen layout. Left panel: branding/tagline. Right panel: form.
+Fields: email, password (toggle visibility), remember me checkbox.
+On submit: POST /auth/login → authStore.login(user, token) → navigate('/dashboard')
+Error: show toast 'Invalid credentials'
+
+── REGISTER PAGE (pages/Auth/Register.jsx) ───────────────────────────
+Fields: name, email, password, confirm password, learning_style (radio cards
+showing icon + label for each style), terms checkbox.
+Validation: passwords match, email format, all required.
+On success: auto-login → navigate('/dashboard')
+
+── SIDEBAR (components/Layout/Sidebar.jsx) ───────────────────────────
+Fixed left sidebar, dark bg (surface.DEFAULT = #0F172A).
+Logo at top. Nav items with Heroicons + labels:
+  Dashboard, Tasks, Schedule, Focus Timer, Wellbeing, AI Chat, Analytics, Settings
+Active item: brand-colored left border + bg brand/10.
+Collapse toggle: chevron icon, collapsed shows only icons.
+Bottom: user avatar + name + logout button.
+
+── NAVBAR (components/Layout/Navbar.jsx) ─────────────────────────────
+Top bar. Left: page title. Right: streak badge (fire + count), notification
+bell (badge count from GET /wellbeing/alerts), user avatar dropdown.
+Dropdown: My Profile, Settings, Logout.	
+
+SECTION 7 — Core Pages: Dashboard & Tasks	
+
+── DASHBOARD (pages/Dashboard.jsx) ───────────────────────────────────
+Data: useQuery(['dashboard'], () => api.get('/analytics/dashboard').then(r=>r.data))
+      useQuery(['schedule-today'], () => api.get('/schedule/'+today).then(r=>r.data))
+      useQuery(['tasks-today'], () => api.get('/tasks/today').then(r=>r.data))
+      useQuery(['mood-history'], () => api.get('/wellbeing/mood/history?days=7').then(r=>r.data))
+
+Layout (dark, grid):
+  Row 1 — 4 Stat Cards (glassmorphism: bg-white/5 backdrop-blur border border-white/10):
+    Card 1: Tasks Completed (this week) — emerald accent
+    Card 2: Study Hours (this week) — brand accent
+    Card 3: Avg Stress — green < 4, amber 4-6, rose > 6, with color-coded number
+    Card 4: Study Streak — amber with flame icon, '🔥 N days'
+
+  Row 2 — 2 columns (60/40 split):
+    Left: Today's Schedule — vertical timeline of time slots.
+      Each slot = colored pill (indigo=study, emerald=break, rose=exam)
+      with time range and task title.
+      If no schedule: 'No schedule for today' + 'Generate Schedule' button.
+    Right: Priority Tasks — top 5 TaskCards stacked, compact variant.
+
+  Row 3 — 2 charts:
+    Left: Weekly Study Hours — Recharts BarChart, 7 bars Mon-Sun,
+      bar color = brand if today else surface.elevated.
+    Right: Mood Trend — Recharts LineChart, 7 days,
+      two lines: mood_score (brand) + stress_level (rose), with dots.
+
+── TASKS PAGE (pages/Tasks.jsx) ─────────────────────────────────────
+State: filter (all/today/week), subject filter (dropdown), sort (priority/deadline)
+
+Header: 'My Tasks' h1 + 'Add Task' button (indigo, + icon)
+
+Filter bar: pill tabs [All | Today | This Week] + subject select + sort select
+
+Task list: map over filtered/sorted tasks → <TaskCard />
+Empty state: SVG illustration of empty clipboard + 'No tasks yet' + 'Add your first task'
+
+Add Task Slide-over (right panel, 400px wide, slides in):
+  Fields:
+    Title (text input, required)
+    Subject (combobox with suggestions: Mathematics, Physics, Chemistry,
+             Computer Science, English, History, custom)
+    Deadline (date-time picker)
+    Difficulty (1-5 star rating component)
+    Estimated Time (number input, minutes)
+    Importance (toggle switch, label: 'Mark as high priority')
+    Description (optional textarea)
+  Footer: Cancel + Save buttons
+  On save: POST /tasks → invalidate ['tasks'] query → show success toast
+
+TaskCard component (components/TaskCard.jsx):
+  Left: colored subject badge (each subject gets consistent hash-based color),
+        task title, deadline (relative: '2 days left', red if overdue),
+        difficulty dots (1-5 filled circles), estimated time badge
+  Right: priority badge (High/Medium/Low based on priority_score),
+         status dropdown (pending → in_progress → done), trash icon
+  Hover: slight lift shadow, delete icon appears
+  Status change: PATCH /tasks/{id}/status → optimistic update
+  Delete: confirm dialog → DELETE /tasks/{id} → invalidate cache	
+
+SECTION 8 — AI Chat & Focus Timer Pages	
+
+── AI CHAT (pages/Chat.jsx) ──────────────────────────────────────────
+State: messages[] (local, seeded from GET /chat/history on mount),
+       inputText, isLoading, showNotesSummarizer
+
+Layout (full viewport height, flex col):
+  Top bar: 'Study Companion' title + brain emoji + 'Clear history' button
+
+  Quick Prompt Chips (shown when messages.length === 0 or on demand):
+    Clickable pills: 'Give me a study tip 📚'
+                     'I am feeling stressed 😰'
+                     'Help me prioritize my tasks 📋'
+                     'Explain a topic to me 🎓'
+    Clicking a chip fills input + auto-sends
+
+  Messages area (flex-1 overflow-y-auto, reverse scroll):
+    User bubble: right-aligned, bg-brand rounded-2xl rounded-br-none,
+                 white text, timestamp on hover
+    AI bubble: left-aligned, bg-surface.card rounded-2xl rounded-bl-none,
+               brain icon avatar (purple), text-slate-100, timestamp on hover
+    Typing indicator: 3 animated dots (CSS keyframes, opacity pulse)
+
+  Input bar (sticky bottom, bg-surface.DEFAULT border-t border-white/10):
+    Textarea: auto-resize (max 4 rows), placeholder 'Ask your study companion...'
+    Paperclip button: opens Summarize Notes modal
+    Send button: disabled while loading, spinning icon while loading
+    Enter to send (Shift+Enter = newline)
+
+  Summarize Notes Modal:
+    Large textarea: 'Paste your notes here...'
+    Summarize button → POST /chat/summarize-notes
+    Result appears in chat as AI message
+
+Send flow:
+  1. Append user message to local messages[] immediately (optimistic)
+  2. Set isLoading = true, show typing indicator
+  3. POST /chat/message { content: inputText }
+  4. Append AI response to messages[]
+  5. Set isLoading = false
+  6. Save both to DB (handled server-side)
+
+── FOCUS TIMER (pages/FocusTimer.jsx) ───────────────────────────────
+State: timerState (idle|running|break|done), secondsLeft,
+       sessionId, selectedTaskId, focusScore, notes, distractionCount
+
+Layout: 2 columns
+
+Left col — Timer:
+  SVG circular timer:
+    Outer ring: full circle (slate-700)
+    Progress ring: stroke-dasharray animation, brand color for work,
+                   emerald for break. Smooth CSS transition.
+    Center: large countdown MM:SS, below it 'Focus Time' or 'Break Time'
+    Below circle: session label, selected task title
+
+  Task selector (dropdown, fetch GET /tasks?status=pending):
+    Shown only in idle state
+
+  Duration controls (idle state):
+    Work: 15 | 25 | 45 | 60 min (pill buttons)
+    Break: 5 | 10 | 15 min
+
+  Control buttons:
+    Idle: [Start Session] → POST /focus/start → setState(running)
+    Running: [Take Break] → POST /focus/break → setState(break)
+             [End Session] → show rating modal
+    Break: [Resume Work] → setState(running)
+           [I got distracted] → increment distractionCount
+
+Right col — Stats Sidebar:
+  Today's totals: focus time, sessions count, avg focus score
+  Streak: current streak days
+  Last 5 sessions: mini list with task, duration, focus score stars
+  Motivational quote: rotates daily (hardcoded array, seeded by date)
+
+Timer logic: useEffect with setInterval, decrements secondsLeft every second.
+  When secondsLeft === 0 and state === running:
+    Play chime (new Audio('/chime.mp3').play())
+    Auto-switch to break state, reset timer to breakDuration
+  When break ends: notify, return to idle
+
+Rating Modal (on End Session):
+  Focus score: large 1-10 slider with emoji feedback
+  Notes: textarea (optional)
+  Distraction count shown
+  Submit: POST /focus/end → navigate back to idle → invalidate focus stats	
+
+SECTION 9 — Wellbeing & Analytics Pages	
+
+── WELLBEING PAGE (pages/Wellbeing.jsx) ─────────────────────────────
+Data: mood history (30 days), stress alert, recommendations
+
+Top section — Daily Check-in Card:
+  Show only if no MoodEntry for today (check history[0].date === today)
+  Title: 'How are you feeling today?'
+  Mood row: 10 emoji buttons (😞😟😕😐🙂😊😃😄😁🤩)
+    Selected: ring-2 ring-brand scale-125 transition
+  Stress slider: 1-10 with color gradient (green→amber→rose)
+    Label updates: 1-3='Relaxed', 4-5='Mild', 6-7='Moderate', 8-10='High'
+  Trigger tags: checkbox pills [Exams] [Workload] [Sleep] [Social] [Other]
+  Notes: optional textarea (placeholder: 'What is on your mind?')
+  Submit: POST /wellbeing/mood → invalidate queries → show encouragement toast
+
+Alert Banner (show if alert_triggered === true):
+  Amber banner with warning icon
+  'Your stress has been elevated for 3+ days. Here is some support:'
+  Recommendations as styled bullet list
+  'Chat with Companion' link button
+
+Mood History Chart:
+  Recharts ComposedChart, x = date (last 30 days)
+  Area: stress_level (rose, 0.3 opacity fill)
+  Line: mood_score (brand, dots)
+  Y axis: 1-10
+  Tooltip: shows both values + date
+  Legend below chart
+
+Break Suggestions Card:
+  POST /wellbeing/break-suggestion on mount
+  Show suggestion with activity icon
+  'Refresh' button to get new suggestion
+
+── ANALYTICS PAGE (pages/Analytics.jsx) ─────────────────────────────
+Top stat strip — 4 cards:
+  Total study hours all time | Tasks completed all time | Best streak | Avg focus
+
+Chart grid (responsive, 2-col on lg, 1-col on mobile):
+
+Chart 1 — Productivity Heatmap:
+  Recharts BarChart, x = 0..23 (hour), y = avg_focus_score
+  Bar fill: color scale based on value:
+    0-3 = slate-600, 4-5 = brand-light, 6-7 = brand, 8-10 = emerald
+  Tooltip: 'Hour 14:00 — Avg Focus: 8.2/10'
+  x-axis labels: 00:00, 06:00, 12:00, 18:00, 23:00
+
+Chart 2 — Subject Distribution:
+  Recharts PieChart with Tooltip and Legend
+  Each subject gets a color from SUBJECT_COLORS constant
+  Show total hours in center (custom label)
+  Legend below with subject name + hours + percentage
+
+Chart 3 — Weekly Completion Rate (8 weeks):
+  Recharts LineChart
+  Line: completion_rate (brand color, dot at each week)
+  Reference line at 80% (dashed, emerald, label 'Target')
+  x-axis: 'Week of {date}'
+  y-axis: 0-100%
+  Area fill under line: brand/20
+
+Export button:
+  window.print() with print-specific CSS (hide nav, full-width charts)	
+
+SECTION 10 — Schedule & Environment Config	
+
+── SCHEDULE PAGE (pages/Schedule.jsx) ───────────────────────────────
+State: currentWeekStart (Monday of current week), selectedSlot
+
+Header: 'My Schedule' + week range display ('Apr 7 — Apr 13')
+  Prev/Next week arrows | 'Today' button | 'Generate AI Schedule' button
+
+'Generate AI Schedule' flow:
+  POST /schedule/generate {start_date: weekStart, days: 7}
+  Show loading spinner on button
+  On success: invalidate week query + show toast 'Schedule generated!'
+
+Week Grid (7 columns):
+  Header row: Mon Tue Wed Thu Fri Sat Sun (with date number)
+  Today's column: bg-white/5 highlight
+  Each column: vertical list of time slots
+    Slot pill: colored by slot_type:
+      study = bg-brand/20 border-l-4 border-brand text-brand
+      break = bg-emerald-500/20 border-l-4 border-emerald-500 text-emerald-400
+      exam  = bg-rose-500/20 border-l-4 border-rose-500 text-rose-400
+    Slot content: time range (small, slate-400) + task title (medium, white)
+    Click slot → open detail popover (task title, duration, subject, action buttons)
+
+Empty day: dashed border placeholder 'No tasks scheduled'
+
+── MAIN.PY (app/main.py) ─────────────────────────────────────────────
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.core.config import settings
+from app.core.database import init_db
+from app.api.routes import auth, tasks, schedule, focus, wellbeing, ai_chat, analytics
+
+app = FastAPI(title='Smart Study Companion API', version='1.0.0')
+
+app.add_middleware(CORSMiddleware,
+  allow_origins=[settings.FRONTEND_URL],
+  allow_credentials=True, allow_methods=['*'], allow_headers=['*']
+)
+
+@app.on_event('startup')
+async def startup(): await init_db()
+
+PREFIX = '/api/v1'
+app.include_router(auth.router,      prefix=PREFIX+'/auth',      tags=['Auth'])
+app.include_router(tasks.router,     prefix=PREFIX+'/tasks',     tags=['Tasks'])
+app.include_router(schedule.router,  prefix=PREFIX+'/schedule',  tags=['Schedule'])
+app.include_router(focus.router,     prefix=PREFIX+'/focus',     tags=['Focus'])
+app.include_router(wellbeing.router, prefix=PREFIX+'/wellbeing', tags=['Wellbeing'])
+app.include_router(ai_chat.router,   prefix=PREFIX+'/chat',      tags=['Chat'])
+app.include_router(analytics.router, prefix=PREFIX+'/analytics', tags=['Analytics'])
+
+── ENVIRONMENT FILES ─────────────────────────────────────────────────
+backend/.env.example:
+  DATABASE_URL=postgresql+asyncpg://postgres:password@localhost:5432/smart_study
+  REDIS_URL=redis://localhost:6379/0
+  SECRET_KEY=your-super-secret-jwt-key-minimum-32-characters
+  ALGORITHM=HS256
+  ACCESS_TOKEN_EXPIRE_MINUTES=1440
+  ANTHROPIC_API_KEY=sk-ant-your-key-here
+  CELERY_BROKER_URL=redis://localhost:6379/1
+  FRONTEND_URL=http://localhost:5173
+  ENVIRONMENT=development
+
+frontend/.env.example:
+  VITE_API_BASE_URL=http://localhost:8000/api/v1
+  VITE_WS_URL=ws://localhost:8000/ws
+
+── REQUIREMENTS.TXT ──────────────────────────────────────────────────
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+sqlalchemy[asyncio]==2.0.30
+asyncpg==0.29.0
+alembic==1.13.1
+pydantic-settings==2.2.1
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+anthropic==0.26.0
+scikit-learn==1.4.2
+numpy==1.26.4
+pandas==2.2.2
+celery==5.4.0
+redis==5.0.4
+python-multipart==0.0.9
+httpx==0.27.0
+
+── PACKAGE.JSON (frontend) ───────────────────────────────────────────
+dependencies: react@^18, react-dom@^18, react-router-dom@^6,
+  @tanstack/react-query@^5, zustand@^4, axios@^1, recharts@^2,
+  @heroicons/react@^2, date-fns@^3, react-hot-toast@^2
+devDependencies: vite@^5, @vitejs/plugin-react, tailwindcss@^3,
+  postcss, autoprefixer, eslint
+
+── DOCKER-COMPOSE.YML ────────────────────────────────────────────────
+services:
+  db:
+    image: postgres:16-alpine
+    environment: POSTGRES_DB=smart_study POSTGRES_USER=postgres
+                 POSTGRES_PASSWORD=password
+    volumes: [pgdata:/var/lib/postgresql/data]
+    ports: ['5432:5432']
+    healthcheck: pg_isready -U postgres
+
+  redis:
+    image: redis:7-alpine
+    ports: ['6379:6379']
+
+  api:
+    build: ./backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes: [./backend:/app]
+    ports: ['8000:8000']
+    env_file: ./backend/.env
+    depends_on: [db, redis]
+
+  worker:
+    build: ./backend
+    command: celery -A app.celery_tasks worker --loglevel=info
+    env_file: ./backend/.env
+    depends_on: [db, redis]
+
+  frontend:
+    build: ./frontend
+    ports: ['5173:80']
+    depends_on: [api]
+
+volumes: { pgdata: {} }	
+
+SECTION 11 — Review Evaluation Guide (24GE4911)	
+
+Evaluation Criterion	Marks	Where Demonstrated	
+Problem Identification & Empathy Understanding	5 / 10	Abstract + Introduction in report; student stress problem framed clearly	
+Ideation & Innovation	5 / 10	AI-powered scheduling, real-time stress detection, personalized chatbot — novel combination	
+Design Thinking Process & Planning	10 / 10	System Workflow Architecture (5-layer) + Feature Pipeline diagram in report	
+Literature / Case Study Survey	5 / 10	7 references in report (WHO, IEEE, MIT Press, ResearchGate, etc.)	
+Project Coding & Implementation	10 / 10	Live FastAPI backend + React frontend; show running app with working AI chat	
+Proposed Solution & Feasibility	5 / 10	Advantages section in report; Docker-compose for easy deployment proves feasibility	
+Presentation & Viva Voce	10 / 10	Demo: Register → Add Task → Generate Schedule → Focus Timer → AI Chat → Mood Log	
+
+All the best for your review! 🚀
+Smart Study Companion — 24GE4911 Design Thinking Project
+Department of AI & DS | Francis Xavier Engineering College	
+

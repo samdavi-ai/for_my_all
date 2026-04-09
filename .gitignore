@@ -1,0 +1,17 @@
+# Root
+.env
+smart_study.db
+
+# Backend
+backend/__pycache__/
+backend/.pytest_cache/
+backend/venv/
+backend/env/
+backend/.env
+*.sqlite3
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
