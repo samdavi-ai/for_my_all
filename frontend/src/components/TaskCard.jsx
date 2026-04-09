@@ -77,7 +77,7 @@ export default function TaskCard({ task, compact = false }) {
   const isOverdue = task.deadline && new Date(task.deadline) < new Date() && task.status !== 'done'
 
   return (
-    <div className={`group relative bg-surface.card rounded-xl border border-white/5 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 ${compact ? 'p-3' : 'p-4'}`}>
+    <div className={`group relative bg-surface-card rounded-xl border border-white/5 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 ${compact ? 'p-3' : 'p-4'}`}>
       <div className="flex items-start justify-between gap-4">
         
         {/* Left Side: Status & Content */}

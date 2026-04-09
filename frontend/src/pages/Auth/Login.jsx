@@ -39,9 +39,9 @@ export default function Login() {
   return (
     <div className="min-h-screen flex text-slate-100 bg-surface">
       {/* Left Panel - Branding */}
-      <div className="hidden lg:flex lg:w-1/2 bg-surface.card items-center justify-center relative overflow-hidden border-r border-white/5">
+      <div className="hidden lg:flex lg:w-1/2 bg-surface-card items-center justify-center relative overflow-hidden border-r border-white/5">
         <div className="absolute inset-0 bg-gradient-to-br from-brand/20 to-purple-500/20 opacity-50"></div>
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-surface.elevated/20 via-transparent to-transparent"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-surface-elevated/20 via-transparent to-transparent"></div>
         
         <div className="relative z-10 flex flex-col items-center max-w-lg text-center p-8">
           <div className="w-24 h-24 bg-brand rounded-2xl flex items-center justify-center text-4xl font-bold shadow-2xl shadow-brand/20 mb-8">
@@ -72,7 +72,7 @@ export default function Login() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="mt-1 block w-full rounded-xl border border-white/10 bg-surface.elevated/30 px-3 py-2 text-white placeholder-slate-500 focus:border-brand focus:ring-1 focus:ring-brand sm:text-sm"
+                  className="mt-1 block w-full rounded-xl border border-white/10 bg-surface-elevated/30 px-3 py-2 text-white placeholder-slate-500 focus:border-brand focus:ring-1 focus:ring-brand sm:text-sm"
                   placeholder="name@university.edu"
                 />
               </div>
@@ -84,7 +84,7 @@ export default function Login() {
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="block w-full rounded-xl border border-white/10 bg-surface.elevated/30 px-3 py-2 text-white placeholder-slate-500 focus:border-brand focus:ring-1 focus:ring-brand sm:text-sm"
+                    className="block w-full rounded-xl border border-white/10 bg-surface-elevated/30 px-3 py-2 text-white placeholder-slate-500 focus:border-brand focus:ring-1 focus:ring-brand sm:text-sm"
                     placeholder="••••••••"
                   />
                   <button
@@ -114,7 +114,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-brand hover:bg-brand.dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface focus:ring-brand transition-colors disabled:opacity-50"
+              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-brand hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface focus:ring-brand transition-colors disabled:opacity-50"
             >
               {loading ? 'Signing in...' : 'Sign in'}
             </button>
@@ -122,7 +122,7 @@ export default function Login() {
 
           <p className="text-center text-sm text-slate-400 mt-6">
             Don't have an account?{' '}
-            <Link to="/register" className="font-medium text-brand hover:text-brand.light">
+            <Link to="/register" className="font-medium text-brand hover:text-brand-light">
               Register now
             </Link>
           </p>

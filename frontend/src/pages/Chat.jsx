@@ -104,10 +104,10 @@ export default function Chat() {
   ]
 
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col bg-surface.card rounded-2xl border border-white/5 shadow-md overflow-hidden relative">
+    <div className="h-[calc(100vh-8rem)] flex flex-col bg-surface-card rounded-2xl border border-white/5 shadow-md overflow-hidden relative">
       
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-white/10 bg-surface.card">
+      <div className="flex items-center justify-between p-4 border-b border-white/10 bg-surface-card">
         <div className="flex items-center">
           <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center mr-3 border border-purple-500/20">
             <SparklesIcon className="w-6 h-6" />
@@ -155,7 +155,7 @@ export default function Chat() {
                   <button 
                     key={i} 
                     onClick={() => handleSend(p.query)}
-                    className="p-3 rounded-xl bg-surface.elevated/30 border border-white/5 text-slate-300 hover:bg-white/10 hover:text-white transition-all text-sm text-left shadow-sm"
+                    className="p-3 rounded-xl bg-surface-elevated/30 border border-white/5 text-slate-300 hover:bg-white/10 hover:text-white transition-all text-sm text-left shadow-sm"
                   >
                     {p.text}
                   </button>
@@ -183,7 +183,7 @@ export default function Chat() {
                    <div className={`p-4 shadow-sm ${
                      msg.role === 'user' 
                       ? 'bg-brand text-white rounded-2xl rounded-tr-sm' 
-                      : 'bg-surface.elevated/50 text-slate-200 rounded-2xl rounded-tl-sm border border-white/5'
+                      : 'bg-surface-elevated/50 text-slate-200 rounded-2xl rounded-tl-sm border border-white/5'
                    }`}>
                       {msg.role === 'assistant' ? (
                          <div className="prose prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-surface prose-pre:border prose-pre:border-white/10">
@@ -209,7 +209,7 @@ export default function Chat() {
                <div className="w-8 h-8 flex-shrink-0 mt-1 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center ring-2 ring-surface">
                  <SparklesIcon className="w-5 h-5" />
                </div>
-               <div className="bg-surface.elevated/50 p-4 rounded-2xl rounded-tl-sm border border-white/5 flex items-center gap-1.5 shadow-sm h-[52px]">
+               <div className="bg-surface-elevated/50 p-4 rounded-2xl rounded-tl-sm border border-white/5 flex items-center gap-1.5 shadow-sm h-[52px]">
                  <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"></span>
                  <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
                  <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></span>
@@ -222,7 +222,7 @@ export default function Chat() {
 
       {/* Input Area */}
       <div className="p-4 border-t border-white/10 bg-surface">
-         <div className="flex items-end gap-2 bg-surface.card border border-white/10 rounded-2xl p-1.5 pb-2 transition-colors focus-within:border-brand/50 focus-within:ring-1 focus-within:ring-brand/50 shadow-inner">
+         <div className="flex items-end gap-2 bg-surface-card border border-white/10 rounded-2xl p-1.5 pb-2 transition-colors focus-within:border-brand/50 focus-within:ring-1 focus-within:ring-brand/50 shadow-inner">
            
            <button 
              onClick={() => setIsNotesModalOpen(true)}
@@ -244,7 +244,7 @@ export default function Chat() {
            <button 
              onClick={() => handleSend(inputText)}
              disabled={!inputText.trim() || isTyping}
-             className="p-2.5 bg-brand text-white rounded-xl hover:bg-brand.dark disabled:opacity-50 disabled:hover:bg-brand transition-colors shadow-md self-end"
+             className="p-2.5 bg-brand text-white rounded-xl hover:bg-brand-dark disabled:opacity-50 disabled:hover:bg-brand transition-colors shadow-md self-end"
            >
              <PaperAirplaneIcon className="w-5 h-5" />
            </button>
@@ -254,7 +254,7 @@ export default function Chat() {
       {/* Summarize Notes Modal */}
       {isNotesModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-surface/80 backdrop-blur-sm">
-          <div className="bg-surface.card rounded-2xl w-full max-w-2xl border border-white/10 shadow-2xl flex flex-col">
+          <div className="bg-surface-card rounded-2xl w-full max-w-2xl border border-white/10 shadow-2xl flex flex-col">
             <div className="flex justify-between items-center p-5 border-b border-white/10">
               <h3 className="text-lg font-semibold text-white flex items-center">
                 <DocumentTextIcon className="w-5 h-5 mr-2 text-brand" />
@@ -270,18 +270,18 @@ export default function Chat() {
                 value={notesText}
                 onChange={e => setNotesText(e.target.value)}
                 placeholder="Paste your long study notes, articles, or lecture transcripts here..."
-                className="w-full h-64 bg-surface.elevated/30 border border-white/10 rounded-xl p-4 text-white text-sm focus:ring-1 focus:ring-brand focus:border-brand resize-none"
+                className="w-full h-64 bg-surface-elevated/30 border border-white/10 rounded-xl p-4 text-white text-sm focus:ring-1 focus:ring-brand focus:border-brand resize-none"
               />
             </div>
             
-            <div className="p-5 border-t border-white/10 flex justify-end gap-3 bg-surface.card rounded-b-2xl">
+            <div className="p-5 border-t border-white/10 flex justify-end gap-3 bg-surface-card rounded-b-2xl">
                <button onClick={() => setIsNotesModalOpen(false)} className="px-4 py-2 text-slate-300 hover:bg-white/5 rounded-lg transition-colors">
                  Cancel
                </button>
                <button 
                  onClick={() => summarizeMutation.mutate({ text: notesText })}
                  disabled={!notesText.trim() || summarizeMutation.isPending}
-                 className="px-6 py-2 bg-brand text-white rounded-lg hover:bg-brand.dark disabled:opacity-50 flex items-center tracking-wide font-medium shadow-lg shadow-brand/20 transition-colors"
+                 className="px-6 py-2 bg-brand text-white rounded-lg hover:bg-brand-dark disabled:opacity-50 flex items-center tracking-wide font-medium shadow-lg shadow-brand/20 transition-colors"
                >
                  {summarizeMutation.isPending ? 'Summarizing...' : <><SparklesIcon className="w-4 h-4 mr-2" /> Summarize</>}
                </button>

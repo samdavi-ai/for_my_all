@@ -65,7 +65,7 @@ export default function Dashboard() {
       {/* Row 1: Stat Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {statCards.map((stat, i) => (
-           <div key={i} className="bg-surface.card/80 backdrop-blur-xl border border-white/10 rounded-2xl p-5 hover:border-white/20 transition-all flex items-start justify-between shadow-xl shadow-black/20">
+           <div key={i} className="bg-surface-card/80 backdrop-blur-xl border border-white/10 rounded-2xl p-5 hover:border-white/20 transition-all flex items-start justify-between shadow-xl shadow-black/20">
              <div>
                <p className="text-slate-400 text-sm font-medium">{stat.title}</p>
                <h3 className={`text-2xl font-bold mt-1 ${stat.color}`}>{isLoadingDash ? '--' : stat.value}</h3>
@@ -82,10 +82,10 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         
         {/* Today's Schedule (60%) */}
-        <div className="lg:col-span-3 bg-surface.card rounded-2xl border border-white/5 p-6 shadow-md flex flex-col min-h-[400px]">
+        <div className="lg:col-span-3 bg-surface-card rounded-2xl border border-white/5 p-6 shadow-md flex flex-col min-h-[400px]">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-semibold text-white">Today's Schedule</h2>
-            <Link to="/schedule" className="text-sm text-brand hover:text-brand.light flex items-center">
+            <Link to="/schedule" className="text-sm text-brand hover:text-brand-light flex items-center">
               Full week <ArrowRightIcon className="w-4 h-4 ml-1" />
             </Link>
           </div>
@@ -105,7 +105,7 @@ export default function Dashboard() {
                    return (
                      <div key={i} className="relative pl-6">
                        {/* Timeline dot */}
-                       <div className={`absolute -left-[9px] top-1 w-4 h-4 rounded-full border-4 border-surface.card ${isBreak ? 'bg-emerald-500' : 'bg-brand'}`}></div>
+                       <div className={`absolute -left-[9px] top-1 w-4 h-4 rounded-full border-4 border-surface-card ${isBreak ? 'bg-emerald-500' : 'bg-brand'}`}></div>
                        
                        <div className={`p-4 rounded-xl border-l-4 shadow-sm ${
                          isBreak ? 'bg-emerald-500/10 border-emerald-500 text-emerald-400' : 'bg-brand/10 border-brand text-slate-200'
@@ -130,7 +130,7 @@ export default function Dashboard() {
         </div>
 
         {/* Priority Tasks (40%) */}
-        <div className="lg:col-span-2 bg-surface.card rounded-2xl border border-white/5 p-6 shadow-md flex flex-col min-h-[400px]">
+        <div className="lg:col-span-2 bg-surface-card rounded-2xl border border-white/5 p-6 shadow-md flex flex-col min-h-[400px]">
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center">
               <h2 className="text-lg font-semibold text-white mr-2">Priority Tasks</h2>
@@ -161,7 +161,7 @@ export default function Dashboard() {
       {/* Row 3: Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-6">
         {/* Weekly Study Hours */}
-        <div className="bg-surface.card rounded-2xl border border-white/5 p-6 shadow-md">
+        <div className="bg-surface-card rounded-2xl border border-white/5 p-6 shadow-md">
            <h2 className="text-lg font-semibold text-white mb-6">Weekly Study Hours</h2>
            <div className="h-64">
              <ResponsiveContainer width="100%" height="100%">
@@ -183,7 +183,7 @@ export default function Dashboard() {
         </div>
 
         {/* Mood/Stress Trend */}
-        <div className="bg-surface.card rounded-2xl border border-white/5 p-6 shadow-md">
+        <div className="bg-surface-card rounded-2xl border border-white/5 p-6 shadow-md">
            <h2 className="text-lg font-semibold text-white mb-6">Mood & Stress Trend</h2>
            <div className="h-64">
            {moodChartData.length > 1 ? (

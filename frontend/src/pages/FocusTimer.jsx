@@ -164,7 +164,7 @@ export default function FocusTimer() {
     <div className="flex flex-col lg:flex-row gap-6 h-[calc(100vh-8rem)]">
       
       {/* Timer Section */}
-      <div className="flex-1 bg-surface.card rounded-2xl border border-white/5 flex flex-col items-center justify-center p-8 relative shadow-lg overflow-y-auto no-scrollbar">
+      <div className="flex-1 bg-surface-card rounded-2xl border border-white/5 flex flex-col items-center justify-center p-8 relative shadow-lg overflow-y-auto no-scrollbar">
         
         {/* Preset controls (only visible when idle) */}
         {timerState === 'idle' && (
@@ -185,7 +185,7 @@ export default function FocusTimer() {
         <div className="relative flex items-center justify-center mb-8 mt-12">
            <svg className="transform -rotate-90 w-[300px] h-[300px]">
              {/* Background circle */}
-             <circle cx="150" cy="150" r={radius} stroke="currentColor" strokeWidth="12" fill="transparent" className="text-surface.elevated" />
+             <circle cx="150" cy="150" r={radius} stroke="currentColor" strokeWidth="12" fill="transparent" className="text-surface-elevated" />
              {/* Progress circle */}
              <circle 
                cx="150" cy="150" r={radius} 
@@ -212,7 +212,7 @@ export default function FocusTimer() {
           <div className="w-full max-w-xs mb-8">
             <select 
               value={selectedTaskId} onChange={e => setSelectedTaskId(e.target.value)}
-              className="w-full bg-surface.elevated/30 border border-white/10 rounded-xl px-4 py-3 text-slate-300 outline-none focus:ring-1 focus:ring-brand text-center appearance-none"
+              className="w-full bg-surface-elevated/30 border border-white/10 rounded-xl px-4 py-3 text-slate-300 outline-none focus:ring-1 focus:ring-brand text-center appearance-none"
             >
               <option value="">No specific task</option>
               {tasks?.map(t => <option key={t.id} value={t.id}>{t.title}</option>)}
@@ -227,17 +227,17 @@ export default function FocusTimer() {
         {/* Controls */}
         <div className="flex items-center gap-4">
            {timerState === 'idle' ? (
-              <button onClick={handleStart} disabled={startMutation.isPending} className="w-20 h-20 bg-brand text-white rounded-full flex items-center justify-center hover:bg-brand.dark transition-transform hover:scale-105 shadow-xl shadow-brand/20">
+              <button onClick={handleStart} disabled={startMutation.isPending} className="w-20 h-20 bg-brand text-white rounded-full flex items-center justify-center hover:bg-brand-dark transition-transform hover:scale-105 shadow-xl shadow-brand/20">
                 <PlayIcon className="w-10 h-10 ml-1" />
               </button>
            ) : (
              <>
                {timerState === 'running' ? (
-                 <button onClick={handlePause} className="w-16 h-16 bg-surface.elevated text-white rounded-full flex items-center justify-center hover:bg-white/20 transition-transform hover:scale-105">
+                 <button onClick={handlePause} className="w-16 h-16 bg-surface-elevated text-white rounded-full flex items-center justify-center hover:bg-white/20 transition-transform hover:scale-105">
                    <PauseIcon className="w-8 h-8" />
                  </button>
                ) : (
-                 <button onClick={handleStart} className="w-16 h-16 bg-brand text-white rounded-full flex items-center justify-center hover:bg-brand.dark transition-transform hover:scale-105 shadow-lg shadow-brand/20">
+                 <button onClick={handleStart} className="w-16 h-16 bg-brand text-white rounded-full flex items-center justify-center hover:bg-brand-dark transition-transform hover:scale-105 shadow-lg shadow-brand/20">
                    <PlayIcon className="w-8 h-8 ml-1" />
                  </button>
                )}
@@ -261,7 +261,7 @@ export default function FocusTimer() {
       <div className="w-full lg:w-80 flex flex-col gap-6">
         
         {/* Today's Overview */}
-        <div className="bg-surface.card rounded-2xl border border-white/5 p-5 shadow-md">
+        <div className="bg-surface-card rounded-2xl border border-white/5 p-5 shadow-md">
            <h3 className="text-white font-semibold flex items-center mb-4">
              <SparklesIcon className="w-5 h-5 mr-2 text-brand" /> Today's Focus
            </h3>
@@ -286,7 +286,7 @@ export default function FocusTimer() {
         </div>
 
         {/* Recent Sessions */}
-        <div className="flex-1 bg-surface.card rounded-2xl border border-white/5 p-5 shadow-md overflow-hidden flex flex-col">
+        <div className="flex-1 bg-surface-card rounded-2xl border border-white/5 p-5 shadow-md overflow-hidden flex flex-col">
            <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider text-slate-400">Recent Sessions</h3>
            <div className="flex-1 overflow-y-auto no-scrollbar space-y-3">
               {sessions?.length > 0 ? sessions.map(s => (
@@ -313,7 +313,7 @@ export default function FocusTimer() {
       {/* Rating Modal */}
       {timerState === 'rating' && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-surface/90 backdrop-blur-sm transition-opacity">
-          <div className="bg-surface.card rounded-2xl w-full max-w-md border border-white/10 shadow-2xl p-6">
+          <div className="bg-surface-card rounded-2xl w-full max-w-md border border-white/10 shadow-2xl p-6">
             <h2 className="text-2xl font-bold text-white mb-2 text-center">Session Complete! 🎉</h2>
             <p className="text-slate-400 text-sm text-center mb-6">How was your focus during this session?</p>
             
@@ -327,7 +327,7 @@ export default function FocusTimer() {
                  <input 
                    type="range" min="1" max="10" 
                    value={ratingData.focusScore} onChange={e => setRatingData({...ratingData, focusScore: parseInt(e.target.value)})}
-                   className="w-full h-2 bg-surface.elevated rounded-lg appearance-none cursor-pointer accent-brand"
+                   className="w-full h-2 bg-surface-elevated rounded-lg appearance-none cursor-pointer accent-brand"
                  />
                  <div className="flex justify-between text-xs text-slate-500 mt-2">
                    <span>Distracted</span>
@@ -337,7 +337,7 @@ export default function FocusTimer() {
 
                <div>
                  <label className="block text-slate-300 text-sm mb-2">Did you get distracted?</label>
-                 <div className="flex items-center gap-4 border border-white/10 bg-surface.elevated/30 rounded-xl p-2 w-max">
+                 <div className="flex items-center gap-4 border border-white/10 bg-surface-elevated/30 rounded-xl p-2 w-max">
                    <button onClick={() => setRatingData(p => ({...p, distractionCount: Math.max(0, p.distractionCount-1)}))} className="w-8 h-8 flex items-center justify-center rounded hover:bg-white/5 text-slate-300">-</button>
                    <span className="text-white font-medium w-4 text-center">{ratingData.distractionCount}</span>
                    <button onClick={() => setRatingData(p => ({...p, distractionCount: p.distractionCount+1}))} className="w-8 h-8 flex items-center justify-center rounded hover:bg-white/5 text-slate-300">+</button>
@@ -349,7 +349,7 @@ export default function FocusTimer() {
                  <textarea 
                    rows="2"
                    value={ratingData.notes} onChange={e => setRatingData({...ratingData, notes: e.target.value})}
-                   className="w-full bg-surface.elevated/50 border border-white/10 rounded-xl px-3 py-2 text-white text-sm focus:ring-1 focus:ring-brand resize-none"
+                   className="w-full bg-surface-elevated/50 border border-white/10 rounded-xl px-3 py-2 text-white text-sm focus:ring-1 focus:ring-brand resize-none"
                    placeholder="What did you accomplish?"
                  />
                </div>
@@ -357,7 +357,7 @@ export default function FocusTimer() {
                <button 
                  onClick={submitRating}
                  disabled={endMutation.isPending}
-                 className="w-full py-3 bg-brand hover:bg-brand.dark text-white rounded-xl shadow-lg shadow-brand/20 font-medium transition-colors"
+                 className="w-full py-3 bg-brand hover:bg-brand-dark text-white rounded-xl shadow-lg shadow-brand/20 font-medium transition-colors"
                >
                  {endMutation.isPending ? 'Saving...' : 'Save Session Stats'}
                </button>

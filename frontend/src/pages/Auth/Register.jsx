@@ -72,7 +72,7 @@ export default function Register() {
   return (
     <div className="min-h-screen flex text-slate-100 bg-surface">
       <div className="w-full flex items-center justify-center p-6 sm:p-12">
-        <div className="w-full max-w-xl space-y-8 bg-surface.card p-8 rounded-2xl border border-white/5 shadow-xl">
+        <div className="w-full max-w-xl space-y-8 bg-surface-card p-8 rounded-2xl border border-white/5 shadow-xl">
           <div className="text-center">
             <div className="w-16 h-16 bg-brand rounded-2xl flex items-center justify-center text-2xl font-bold shadow-lg shadow-brand/20 mx-auto mb-4">
               SC
@@ -92,7 +92,7 @@ export default function Register() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-xl border border-white/10 bg-surface.elevated/30 px-3 py-2 text-white placeholder-slate-500 focus:border-brand focus:ring-1 focus:ring-brand sm:text-sm"
+                  className="mt-1 block w-full rounded-xl border border-white/10 bg-surface-elevated/30 px-3 py-2 text-white placeholder-slate-500 focus:border-brand focus:ring-1 focus:ring-brand sm:text-sm"
                   placeholder="John Doe"
                 />
               </div>
@@ -105,7 +105,7 @@ export default function Register() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-xl border border-white/10 bg-surface.elevated/30 px-3 py-2 text-white placeholder-slate-500 focus:border-brand focus:ring-1 focus:ring-brand sm:text-sm"
+                  className="mt-1 block w-full rounded-xl border border-white/10 bg-surface-elevated/30 px-3 py-2 text-white placeholder-slate-500 focus:border-brand focus:ring-1 focus:ring-brand sm:text-sm"
                   placeholder="name@university.edu"
                 />
               </div>
@@ -118,7 +118,7 @@ export default function Register() {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-xl border border-white/10 bg-surface.elevated/30 px-3 py-2 text-white focus:border-brand focus:ring-1 focus:ring-brand sm:text-sm"
+                  className="mt-1 block w-full rounded-xl border border-white/10 bg-surface-elevated/30 px-3 py-2 text-white focus:border-brand focus:ring-1 focus:ring-brand sm:text-sm"
                 />
               </div>
 
@@ -130,7 +130,7 @@ export default function Register() {
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-xl border border-white/10 bg-surface.elevated/30 px-3 py-2 text-white focus:border-brand focus:ring-1 focus:ring-brand sm:text-sm"
+                  className="mt-1 block w-full rounded-xl border border-white/10 bg-surface-elevated/30 px-3 py-2 text-white focus:border-brand focus:ring-1 focus:ring-brand sm:text-sm"
                 />
               </div>
             </div>
@@ -139,7 +139,7 @@ export default function Register() {
                 <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="text-sm text-brand hover:text-brand.light flex items-center"
+                    className="text-sm text-brand hover:text-brand-light flex items-center"
                 >
                     {showPassword ? <><EyeSlashIcon className="h-4 w-4 mr-1" /> Hide Passwords</> : <><EyeIcon className="h-4 w-4 mr-1" /> Show Passwords</>}
                 </button>
@@ -158,7 +158,7 @@ export default function Register() {
                       className={`cursor-pointer border rounded-xl p-3 flex flex-col items-center justify-center text-center transition-all ${
                         isSelected 
                         ? 'border-brand bg-brand/10 text-brand' 
-                        : 'border-white/10 bg-surface.elevated/30 text-slate-400 hover:border-slate-500 hover:text-slate-300'
+                        : 'border-white/10 bg-surface-elevated/30 text-slate-400 hover:border-slate-500 hover:text-slate-300'
                       }`}
                     >
                       <Icon className="h-6 w-6 mb-2" />
@@ -186,7 +186,7 @@ export default function Register() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-brand hover:bg-brand.dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface focus:ring-brand transition-colors disabled:opacity-50"
+              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-brand hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface focus:ring-brand transition-colors disabled:opacity-50"
             >
               {loading ? 'Creating account...' : 'Create Account'}
             </button>
@@ -194,7 +194,7 @@ export default function Register() {
 
           <p className="text-center text-sm text-slate-400">
             Already have an account?{' '}
-            <Link to="/login" className="font-medium text-brand hover:text-brand.light">
+            <Link to="/login" className="font-medium text-brand hover:text-brand-light">
               Sign in
             </Link>
           </p>

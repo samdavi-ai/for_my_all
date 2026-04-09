@@ -68,10 +68,10 @@ export default function Schedule() {
     <div className="h-[calc(100vh-8rem)] flex flex-col space-y-6">
       
       {/* Header controls */}
-      <div className="flex flex-col sm:flex-row justify-between items-center bg-surface.card p-4 rounded-2xl border border-white/5 shadow-sm gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center bg-surface-card p-4 rounded-2xl border border-white/5 shadow-sm gap-4">
         
         <div className="flex items-center gap-4">
-          <button onClick={goToday} className="px-3 py-1.5 bg-surface.elevated rounded-lg text-sm font-medium hover:bg-white/10 transition">
+          <button onClick={goToday} className="px-3 py-1.5 bg-surface-elevated rounded-lg text-sm font-medium hover:bg-white/10 transition">
             Today
           </button>
           <div className="flex items-center gap-2 bg-surface rounded-lg p-1 border border-white/5">
@@ -103,7 +103,7 @@ export default function Schedule() {
       </div>
 
       {/* Calendar Grid */}
-      <div className="flex-1 overflow-x-auto overflow-y-hidden bg-surface.card rounded-2xl border border-white/5 shadow-md flex min-w-[800px]">
+      <div className="flex-1 overflow-x-auto overflow-y-hidden bg-surface-card rounded-2xl border border-white/5 shadow-md flex min-w-[800px]">
         {weekDays.map((day, idx) => {
           const dateStr = format(day.dateObj, 'yyyy-MM-dd')
           const slots = getDaySchedule(dateStr)

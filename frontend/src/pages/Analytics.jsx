@@ -42,7 +42,7 @@ export default function Analytics() {
         </div>
         <button 
           onClick={handlePrint}
-          className="flex items-center px-4 py-2 bg-surface.elevated hover:bg-white/10 text-white rounded-lg transition"
+          className="flex items-center px-4 py-2 bg-surface-elevated hover:bg-white/10 text-white rounded-lg transition"
         >
           <ArrowDownTrayIcon className="w-5 h-5 mr-2" />
           Export Report
@@ -57,7 +57,7 @@ export default function Analytics() {
           { label: 'Current Streak', val: `${streaks?.current_streak || 0} days` },
           { label: 'Avg Focus Score', val: '8.4/10' } // Mocked focus score for demo since endpoint is week-only
         ].map((s, i) => (
-          <div key={i} className="bg-surface.card p-4 rounded-xl border border-white/5 text-center shadow-sm">
+          <div key={i} className="bg-surface-card p-4 rounded-xl border border-white/5 text-center shadow-sm">
              <div className="text-2xl font-bold text-white mb-1">{s.val}</div>
              <div className="text-xs text-slate-400 uppercase tracking-wide">{s.label}</div>
           </div>
@@ -67,7 +67,7 @@ export default function Analytics() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Heatmap */}
-        <div className="bg-surface.card rounded-2xl border border-white/5 p-6 shadow-md print:break-inside-avoid">
+        <div className="bg-surface-card rounded-2xl border border-white/5 p-6 shadow-md print:break-inside-avoid">
           <h3 className="text-white font-semibold mb-6">Productivity Heatmap (Average Focus / Hour)</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -91,7 +91,7 @@ export default function Analytics() {
         </div>
 
         {/* Categories */}
-        <div className="bg-surface.card rounded-2xl border border-white/5 p-6 shadow-md print:break-inside-avoid">
+        <div className="bg-surface-card rounded-2xl border border-white/5 p-6 shadow-md print:break-inside-avoid">
            <h3 className="text-white font-semibold mb-6">Subject Distribution (All Time)</h3>
            <div className="h-64">
              {subjectsRaw?.length > 0 ? (
@@ -119,7 +119,7 @@ export default function Analytics() {
         </div>
 
         {/* 8-Week Progress Line Chart */}
-        <div className="lg:col-span-2 bg-surface.card rounded-2xl border border-white/5 p-6 shadow-md print:break-inside-avoid">
+        <div className="lg:col-span-2 bg-surface-card rounded-2xl border border-white/5 p-6 shadow-md print:break-inside-avoid">
            <h3 className="text-white font-semibold mb-6">Task Completion Rate (8 Weeks)</h3>
            <div className="h-72">
              <ResponsiveContainer width="100%" height="100%">

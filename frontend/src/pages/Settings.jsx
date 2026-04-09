@@ -33,7 +33,7 @@ export default function Settings() {
 
   return (
     <div className="max-w-2xl mx-auto py-8">
-      <div className="bg-surface.card rounded-2xl border border-white/5 p-8 shadow-xl">
+      <div className="bg-surface-card rounded-2xl border border-white/5 p-8 shadow-xl">
         <h2 className="text-2xl font-bold text-white mb-6">Account Settings</h2>
         
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -42,7 +42,7 @@ export default function Settings() {
             <input 
               value={formData.name}
               onChange={(e) => setFormData({...formData, name: e.target.value})}
-              className="w-full bg-surface.elevated/30 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-1 focus:ring-brand focus:border-brand"
+              className="w-full bg-surface-elevated/30 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-1 focus:ring-brand focus:border-brand"
             />
           </div>
 
@@ -51,7 +51,7 @@ export default function Settings() {
             <input 
               value={user?.email || ''}
               disabled
-              className="w-full bg-surface.elevated/10 border border-white/5 rounded-xl px-4 py-3 text-slate-500 cursor-not-allowed"
+              className="w-full bg-surface-elevated/10 border border-white/5 rounded-xl px-4 py-3 text-slate-500 cursor-not-allowed"
             />
           </div>
 
@@ -66,7 +66,7 @@ export default function Settings() {
                    className={`cursor-pointer border rounded-xl p-3 text-center transition-all ${
                      formData.learning_style === style 
                      ? 'border-brand bg-brand/10 text-brand font-medium' 
-                     : 'border-white/10 bg-surface.elevated/30 text-slate-400 hover:border-slate-500'
+                     : 'border-white/10 bg-surface-elevated/30 text-slate-400 hover:border-slate-500'
                    }`}
                  >
                    <span className="text-sm">{style}</span>
@@ -78,7 +78,7 @@ export default function Settings() {
           <div className="pt-4 border-t border-white/10 flex justify-end">
              <button 
                type="submit" disabled={loading}
-               className="px-6 py-2.5 bg-brand hover:bg-brand.dark text-white rounded-xl shadow-lg shadow-brand/20 font-medium transition-colors disabled:opacity-50"
+               className="px-6 py-2.5 bg-brand hover:bg-brand-dark text-white rounded-xl shadow-lg shadow-brand/20 font-medium transition-colors disabled:opacity-50"
              >
                {loading ? 'Saving...' : 'Save Changes'}
              </button>

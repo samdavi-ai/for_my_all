@@ -71,7 +71,7 @@ export default function Tasks() {
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <button 
           onClick={() => setIsSlideOverOpen(true)}
-          className="flex items-center justify-center px-4 py-2 bg-brand hover:bg-brand.dark text-white rounded-xl shadow-lg shadow-brand/20 transition-all font-medium whitespace-nowrap"
+          className="flex items-center justify-center px-4 py-2 bg-brand hover:bg-brand-dark text-white rounded-xl shadow-lg shadow-brand/20 transition-all font-medium whitespace-nowrap"
         >
           <PlusIcon className="w-5 h-5 mr-2" />
           Add Task
@@ -79,12 +79,12 @@ export default function Tasks() {
 
         <div className="flex flex-wrap items-center gap-3">
            {/* Filters */}
-           <div className="flex bg-surface.elevated/50 p-1 rounded-lg border border-white/5 text-sm">
+           <div className="flex bg-surface-elevated/50 p-1 rounded-lg border border-white/5 text-sm">
              {['all', 'pending', 'in_progress', 'done'].map((f) => (
                <button
                  key={f}
                  onClick={() => setFilter(f)}
-                 className={`px-3 py-1.5 rounded-md capitalize transition-colors ${filter === f ? 'bg-surface.card text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
+                 className={`px-3 py-1.5 rounded-md capitalize transition-colors ${filter === f ? 'bg-surface-card text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
                >
                  {f.replace('_', ' ')}
                </button>
@@ -94,7 +94,7 @@ export default function Tasks() {
            <select 
              value={subjectFilter} 
              onChange={(e) => setSubjectFilter(e.target.value)}
-             className="bg-surface.card border border-white/10 text-slate-200 text-sm rounded-lg px-3 py-2 pr-8 focus:ring-brand focus:border-brand"
+             className="bg-surface-card border border-white/10 text-slate-200 text-sm rounded-lg px-3 py-2 pr-8 focus:ring-brand focus:border-brand"
            >
              <option value="all">All Subjects</option>
              {Object.keys(SUBJECT_COLORS).map(s => (
@@ -105,7 +105,7 @@ export default function Tasks() {
            <select 
              value={sortBy} 
              onChange={(e) => setSortBy(e.target.value)}
-             className="bg-surface.card border border-white/10 text-slate-200 text-sm rounded-lg px-3 py-2 pr-8 focus:ring-brand focus:border-brand"
+             className="bg-surface-card border border-white/10 text-slate-200 text-sm rounded-lg px-3 py-2 pr-8 focus:ring-brand focus:border-brand"
            >
              <option value="priority">Sort by Priority (AI)</option>
              <option value="deadline">Sort by Deadline</option>
@@ -119,7 +119,7 @@ export default function Tasks() {
         {isLoading ? (
           <div className="space-y-4">
             {[1,2,3].map(i => (
-              <div key={i} className="animate-pulse bg-surface.card h-28 rounded-xl border border-white/5"></div>
+              <div key={i} className="animate-pulse bg-surface-card h-28 rounded-xl border border-white/5"></div>
             ))}
           </div>
         ) : tasks?.length > 0 ? (
@@ -145,7 +145,7 @@ export default function Tasks() {
           <div className="absolute inset-0 bg-surface/80 backdrop-blur-sm transition-opacity" onClick={() => setIsSlideOverOpen(false)} />
           
           <div className="fixed inset-y-0 right-0 max-w-full flex">
-            <div className="w-screen max-w-md transform transition ease-in-out duration-500 bg-surface.card shadow-2xl border-l border-white/10 flex flex-col">
+            <div className="w-screen max-w-md transform transition ease-in-out duration-500 bg-surface-card shadow-2xl border-l border-white/10 flex flex-col">
               
               <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
                 <h2 className="text-lg font-semibold text-white">Add New Task</h2>
@@ -162,7 +162,7 @@ export default function Tasks() {
                     <input 
                       required autoFocus maxLength={200}
                       value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})}
-                      className="w-full bg-surface.elevated/30 border border-white/10 rounded-lg px-3 py-2 text-white focus:ring-1 focus:ring-brand focus:border-brand"
+                      className="w-full bg-surface-elevated/30 border border-white/10 rounded-lg px-3 py-2 text-white focus:ring-1 focus:ring-brand focus:border-brand"
                       placeholder="e.g. Chapter 4 Reading" 
                     />
                   </div>
@@ -172,7 +172,7 @@ export default function Tasks() {
                     <select 
                       required
                       value={formData.subject} onChange={e => setFormData({...formData, subject: e.target.value})}
-                      className="w-full bg-surface.elevated/30 border border-white/10 rounded-lg px-3 py-2 text-white outline-none focus:border-brand"
+                      className="w-full bg-surface-elevated/30 border border-white/10 rounded-lg px-3 py-2 text-white outline-none focus:border-brand"
                     >
                       {Object.keys(SUBJECT_COLORS).map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
@@ -183,7 +183,7 @@ export default function Tasks() {
                     <input 
                       type="datetime-local"
                       value={formData.deadline} onChange={e => setFormData({...formData, deadline: e.target.value})}
-                      className="w-full bg-surface.elevated/30 border border-white/10 rounded-lg px-3 py-2 text-white focus:ring-1 focus:ring-brand"
+                      className="w-full bg-surface-elevated/30 border border-white/10 rounded-lg px-3 py-2 text-white focus:ring-1 focus:ring-brand"
                     />
                   </div>
 
@@ -204,7 +204,7 @@ export default function Tasks() {
                       <input 
                         type="number" min="5" max="600" step="5"
                         value={formData.estimated_mins} onChange={e => setFormData({...formData, estimated_mins: parseInt(e.target.value)})}
-                        className="w-full bg-surface.elevated/30 border border-white/10 rounded-lg px-3 py-2 text-white focus:ring-1 focus:ring-brand"
+                        className="w-full bg-surface-elevated/30 border border-white/10 rounded-lg px-3 py-2 text-white focus:ring-1 focus:ring-brand"
                       />
                     </div>
                   </div>
@@ -225,7 +225,7 @@ export default function Tasks() {
                     <textarea 
                       rows={3}
                       value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})}
-                      className="w-full bg-surface.elevated/30 border border-white/10 rounded-lg px-3 py-2 text-white focus:ring-1 focus:ring-brand resize-none"
+                      className="w-full bg-surface-elevated/30 border border-white/10 rounded-lg px-3 py-2 text-white focus:ring-1 focus:ring-brand resize-none"
                       placeholder="Add any links or notes here..."
                     />
                   </div>
@@ -241,7 +241,7 @@ export default function Tasks() {
                 </button>
                 <button 
                   type="submit" form="add-task-form" disabled={createMutation.isPending}
-                  className="px-6 py-2 bg-brand hover:bg-brand.dark text-white rounded-lg font-medium shadow-lg shadow-brand/20 transition-colors disabled:opacity-50"
+                  className="px-6 py-2 bg-brand hover:bg-brand-dark text-white rounded-lg font-medium shadow-lg shadow-brand/20 transition-colors disabled:opacity-50"
                 >
                   {createMutation.isPending ? 'Saving...' : 'Save Task'}
                 </button>

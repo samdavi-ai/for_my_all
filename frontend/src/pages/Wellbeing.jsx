@@ -113,7 +113,7 @@ export default function Wellbeing() {
 
       {/* Daily Check-in Card (Conditional or forced for demo) */}
       {!isTodayLogged && (
-        <div className="bg-surface.card rounded-2xl border border-white/5 p-6 shadow-xl relative overflow-hidden">
+        <div className="bg-surface-card rounded-2xl border border-white/5 p-6 shadow-xl relative overflow-hidden">
           {/* Subtle gradient bg */}
           <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-brand/10 blur-3xl rounded-full"></div>
           
@@ -184,7 +184,7 @@ export default function Wellbeing() {
                 <label className="block text-sm text-slate-400 mb-3">Notes (optional)</label>
                 <textarea 
                   value={notes} onChange={e => setNotes(e.target.value)}
-                  className="w-full bg-surface.elevated/30 border border-white/10 rounded-xl p-3 text-sm text-white resize-none focus:ring-1 focus:ring-brand focus:border-brand"
+                  className="w-full bg-surface-elevated/30 border border-white/10 rounded-xl p-3 text-sm text-white resize-none focus:ring-1 focus:ring-brand focus:border-brand"
                   rows="2"
                   placeholder="Journal your thoughts here..."
                 />
@@ -194,7 +194,7 @@ export default function Wellbeing() {
             <div className="flex justify-end pt-2">
               <button 
                 onClick={handleLog} disabled={logMutation.isPending}
-                className="px-8 py-3 bg-brand text-white rounded-xl font-medium shadow-lg shadow-brand/20 hover:bg-brand.dark transition-all disabled:opacity-50"
+                className="px-8 py-3 bg-brand text-white rounded-xl font-medium shadow-lg shadow-brand/20 hover:bg-brand-dark transition-all disabled:opacity-50"
               >
                 {logMutation.isPending ? 'Saving...' : 'Log Entry'}
               </button>
@@ -207,7 +207,7 @@ export default function Wellbeing() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Analytics Chart */}
-        <div className="lg:col-span-2 bg-surface.card rounded-2xl border border-white/5 p-6 shadow-md">
+        <div className="lg:col-span-2 bg-surface-card rounded-2xl border border-white/5 p-6 shadow-md">
           <h3 className="text-lg font-semibold text-white mb-6">30-Day Trend</h3>
           <div className="h-72">
             {chartData.length > 0 ? (
@@ -238,7 +238,7 @@ export default function Wellbeing() {
         <div className="space-y-6">
           
           {/* Break Suggestion Engine */}
-          <div className="bg-surface.card rounded-2xl border border-white/5 p-6 shadow-md">
+          <div className="bg-surface-card rounded-2xl border border-white/5 p-6 shadow-md">
             <div className="flex justify-between items-center mb-4">
                <h3 className="text-white font-semibold flex items-center">Need a break?</h3>
                <button onClick={() => refreshBreak()} className="text-slate-400 hover:text-white p-1">
@@ -260,13 +260,13 @@ export default function Wellbeing() {
           </div>
 
           {/* AI Study Recommendations */}
-          <div className="bg-surface.card rounded-2xl border border-white/5 p-6 shadow-md flex-1">
+          <div className="bg-surface-card rounded-2xl border border-white/5 p-6 shadow-md flex-1">
              <h3 className="text-white font-semibold mb-4 flex items-center">
                Personalized Tips
              </h3>
              <ul className="space-y-3">
                {recommendations?.tips?.map((tip, i) => (
-                 <li key={i} className="flex items-start text-sm text-slate-300 bg-surface.elevated/30 p-3 rounded-lg">
+                 <li key={i} className="flex items-start text-sm text-slate-300 bg-surface-elevated/30 p-3 rounded-lg">
                    <span className="text-brand mr-2 mt-0.5">•</span>
                    {tip}
                  </li>
