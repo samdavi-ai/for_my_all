@@ -5,7 +5,8 @@ import {
   ClockIcon, 
   HeartIcon, 
   FireIcon,
-  ArrowRightIcon 
+  ArrowRightIcon,
+  CalendarDaysIcon
 } from '@heroicons/react/24/outline'
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts'
 import { format } from 'date-fns'

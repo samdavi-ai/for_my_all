@@ -14,10 +14,10 @@ try:
     c.execute("""
     INSERT INTO users (id, email, hashed_password, name, learning_style)
     VALUES (?, ?, ?, ?, ?)
-    """, (user_id, 'demo@example.com', hashed_pw, 'Demo User', 'Visual'))
+    """, (user_id, 'demo@example.com', hashed_pw, 'Demo User', 'VISUAL'))
     
     conn.commit()
-    print("User deleted and re-inserted successfully via raw SQL!")
+    print("User inserted successfully via raw SQL with VISUAL enum key!")
 except Exception as e:
     print("Error:", e)
 finally:
