@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { chatApi } from '../../api/chatApi'
+import { chatApi } from '../api/chatApi'
 import { 
   PaperAirplaneIcon, 
   TrashIcon, 
@@ -10,7 +10,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { toast } from 'react-hot-toast'
 import ReactMarkdown from 'react-markdown'
-import { formatRelativeTime } from '../../utils/formatters'
+import { formatRelativeTime } from '../utils/formatters'
 
 export default function Chat() {
   const queryClient = useQueryClient()

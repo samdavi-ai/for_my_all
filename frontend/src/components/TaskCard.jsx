@@ -8,9 +8,9 @@ import {
   CheckCircleIcon,
   PlayCircleIcon
 } from '@heroicons/react/24/outline'
-import { formatRelativeTime, formatDuration } from '../../utils/formatters'
-import { getColorForSubject } from '../../utils/constants'
-import { tasksApi } from '../../api/tasksApi'
+import { formatRelativeTime, formatDuration } from '../utils/formatters'
+import { getColorForSubject } from '../utils/constants'
+import { tasksApi } from '../api/tasksApi'
 import { toast } from 'react-hot-toast'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 

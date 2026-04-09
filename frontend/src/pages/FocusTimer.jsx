@@ -3,9 +3,9 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { PlayIcon, PauseIcon, StopIcon, FlagIcon } from '@heroicons/react/24/solid'
 import { SparklesIcon, FireIcon } from '@heroicons/react/24/outline'
 import { toast } from 'react-hot-toast'
-import { tasksApi } from '../../api/tasksApi'
-import { focusApi } from '../../api/focusApi'
-import { formatDuration } from '../../utils/formatters'
+import { tasksApi } from '../api/tasksApi'
+import { focusApi } from '../api/focusApi'
+import { formatDuration } from '../utils/formatters'
 
 export default function FocusTimer() {
   const queryClient = useQueryClient()

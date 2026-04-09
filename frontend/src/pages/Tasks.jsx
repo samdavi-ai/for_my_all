@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { toast } from 'react-hot-toast'
-import TaskCard from '../../components/TaskCard'
-import { tasksApi } from '../../api/tasksApi'
-import { useTaskStore } from '../../store/taskStore'
-import { SUBJECT_COLORS } from '../../utils/constants'
+import TaskCard from '../components/TaskCard'
+import { tasksApi } from '../api/tasksApi'
+import { useTaskStore } from '../store/taskStore'
+import { SUBJECT_COLORS } from '../utils/constants'
 
 export default function Tasks() {
   const queryClient = useQueryClient()
